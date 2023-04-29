@@ -3,6 +3,9 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
-}
+  // env: {
+  //   production: false,
+  // },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
