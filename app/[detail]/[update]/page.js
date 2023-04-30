@@ -34,7 +34,7 @@ const NoteUpdate = () => {
       alert('Note is required');
     } else {
       axios
-        .put(`http://localhost:5000/notes/${id}`, values)
+        .put(`http://3.0.93.80:5000/notes/${id}`, values)
         .then((response) => {
           alert(response.data.message);
         })

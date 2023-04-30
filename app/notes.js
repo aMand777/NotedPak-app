@@ -9,7 +9,7 @@ const NoteList = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5000/notes')
+      .get('http://3.0.93.80:5000/notes')
       .then((response) => {
         setNotes(response.data.data.notes);
       })

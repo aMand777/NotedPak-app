@@ -12,20 +12,20 @@ const DetailNote = ({ params }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/notes/${id}`)
+      .get(`http://3.0.93.80:5000/notes/${id}`)
       .then((response) => {
         setDetailNote(response.data.data.note);
       })
       .catch((error) => {
         alert(error.response.data.message);
-        router.push('/');
+        router.push('/notes');
       });
   }, [id]);
 
   const deleteNote = () => {
     const confirmation = confirm('Are you sure you want to delete this note?');
     if (confirmation) {
-      axios.delete(`http://localhost:5000/notes/${id}`);
+      axios.delete(`http://3.0.93.80:5000/notes/${id}`);
       router.push('/');
       alert('Deleted successfully');
     } else {

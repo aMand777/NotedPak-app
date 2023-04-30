@@ -33,7 +33,7 @@ const CreateNote = () => {
       alert('Note is required');
     } else {
       axios
-        .post('http://localhost:5000/notes', notes)
+        .post('http://3.0.93.80:5000/notes', notes)
         .then((response) => {
           alert(response.data.message);
         })
