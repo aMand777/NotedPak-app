@@ -34,12 +34,12 @@ const NoteUpdate = () => {
       alert('Note is required');
     } else {
       axios
-        .put(`http://3.0.93.80:5000/notes/${id}`, values)
+        .put(`${process.env.NEXT_PUBLIC_API_URL}/notes/${id}`, values)
         .then((response) => {
+          router.push('/');
           alert(response.data.message);
         })
         .catch((error) => console.log(error));
-      router.push('/');
     }
   };
 

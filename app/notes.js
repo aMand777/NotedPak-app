@@ -9,7 +9,7 @@ const NoteList = () => {
 
   useEffect(() => {
     axios
-      .get('http://3.0.93.80:5000/notes')
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/notes`)
       .then((response) => {
         setNotes(response.data.data.notes);
       })

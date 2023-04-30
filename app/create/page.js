@@ -33,12 +33,12 @@ const CreateNote = () => {
       alert('Note is required');
     } else {
       axios
-        .post('http://3.0.93.80:5000/notes', notes)
+        .post(`${process.env.NEXT_PUBLIC_API_URL}/notes`, notes)
         .then((response) => {
+          router.push('/');
           alert(response.data.message);
         })
         .catch((error) => console.log(error));
-      router.push('/');
     }
   };
 

@@ -12,7 +12,7 @@ const DetailNote = ({ params }) => {
 
   useEffect(() => {
     axios
-      .get(`http://3.0.93.80:5000/notes/${id}`)
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/notes/${id}`)
       .then((response) => {
         setDetailNote(response.data.data.note);
       })
@@ -25,7 +25,7 @@ const DetailNote = ({ params }) => {
   const deleteNote = () => {
     const confirmation = confirm('Are you sure you want to delete this note?');
     if (confirmation) {
-      axios.delete(`http://3.0.93.80:5000/notes/${id}`);
+      axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/notes/${id}`);
       router.push('/');
       alert('Deleted successfully');
     } else {
