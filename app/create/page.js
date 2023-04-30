@@ -38,7 +38,7 @@ const CreateNote = () => {
           router.push('/');
           alert(response.data.message);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => alert(error.response.data.message));
     }
   };
 
