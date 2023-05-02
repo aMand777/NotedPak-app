@@ -9,7 +9,7 @@ const NoteList = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/notes`)
+      .get(`https://notes-api.amandd.online/notes`)
       .then((response) => {
         setNotes(response.data.data.notes);
       })

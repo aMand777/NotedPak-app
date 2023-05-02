@@ -33,7 +33,7 @@ const CreateNote = () => {
       alert('Note is required');
     } else {
       axios
-        .post(`${process.env.NEXT_PUBLIC_API_URL}/notes`, notes)
+        .post(`https://notes-api.amandd.online/notes`, notes)
         .then((response) => {
           router.push('/');
           alert(response.data.message);
@@ -48,8 +48,6 @@ const CreateNote = () => {
       handleSubmit(event);
     }
   };
-
-  console.log('api', process.env.NEXT_PUBLIC_API_URL)
 
   return (
     <div>
