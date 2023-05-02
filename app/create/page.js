@@ -49,6 +49,8 @@ const CreateNote = () => {
     }
   };
 
+  console.log('api', process.env.NEXT_PUBLIC_API_URL)
+
   return (
     <div>
       <form method="POST" onSubmit={handleSubmit}>
