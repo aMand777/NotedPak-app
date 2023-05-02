@@ -12,7 +12,7 @@ const DetailNote = ({ params }) => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/notes/${id}`)
+      .get(`https://notes-api.amandd.online/notes/${id}`)
       .then((response) => {
         setDetailNote(response.data.data.note);
       })
@@ -25,7 +25,7 @@ const DetailNote = ({ params }) => {
   const deleteNote = () => {
     const confirmation = confirm('Are you sure you want to delete this note?');
     if (confirmation) {
-      axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/notes/${id}`);
+      axios.delete(`https://notes-api.amandd.online/notes/${id}`);
       router.push('/');
       alert('Deleted successfully');
     } else {

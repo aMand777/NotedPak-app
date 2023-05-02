@@ -34,7 +34,7 @@ const NoteUpdate = () => {
       alert('Note is required');
     } else {
       axios
-        .put(`${process.env.NEXT_PUBLIC_API_URL}/notes/${id}`, values)
+        .put(`https://notes-api.amandd.online/notes/${id}`, values)
         .then((response) => {
           router.push('/');
           alert(response.data.message);
