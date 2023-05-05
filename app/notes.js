@@ -3,18 +3,29 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const NoteList = () => {
   const [notes, setNotes] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios
       .get(`https://notes-api.amandd.online/notes`)
       .then((response) => {
         setNotes(response.data.data.notes);
+        setIsLoading(false);
       })
       .catch((error) => console.log(error));
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className='w-screen h-screen flex justify-center items-center'>
+      <Image src="/img/loading-spin01.png" alt="loading-icon" width={100} height={100} className="animate-spin duration-1000" />
+      </div>
+    );
+  }
 
   return (
     <div className="w-10/12 mx-auto rounded-3xl flex flex-row flex-wrap justify-around mt-5">
