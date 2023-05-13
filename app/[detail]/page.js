@@ -12,7 +12,7 @@ const DetailNote = ({ params }) => {
 
   useEffect(() => {
     axios
-      .get(`https://notes-api.amandd.online/notes/${id}`)
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/notes/${id}`)
       .then((response) => {
         setDetailNote(response.data.data.note);
       })
@@ -25,7 +25,7 @@ const DetailNote = ({ params }) => {
   const deleteNote = () => {
     const confirmation = confirm('Are you sure you want to delete this note?');
     if (confirmation) {
-      axios.delete(`https://notes-api.amandd.online/notes/${id}`);
+      axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/notes/${id}`);
       router.push('/');
       alert('Deleted successfully');
     } else {
@@ -37,7 +37,7 @@ const DetailNote = ({ params }) => {
     <>
       {detailNote ? (
         <div className="w-8/12 sm:w-7/12 md:w-5/12 h-fit my-5 mx-auto">
-            <div className="sm:w-11/12 md:w-10/12 mx-auto h-fit">
+          <div className="sm:w-11/12 md:w-10/12 mx-auto h-fit">
             <div className="bg-secondary shadow rounded-t-md px-4 max-w-sm w-full mx-auto border border-primary border-b-0">
               <h3 className="font-bold text-xl text-center">{detailNote.title}</h3>
               <p className="text-sm mx-1 italic break-words pb-5">{detailNote.body}</p>

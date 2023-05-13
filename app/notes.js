@@ -11,7 +11,7 @@ const NoteList = () => {
 
   useEffect(() => {
     axios
-      .get(`https://notes-api.amandd.online/notes`)
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/notes`)
       .then((response) => {
         setNotes(response.data.data.notes);
         setIsLoading(false);
@@ -21,8 +21,8 @@ const NoteList = () => {
 
   if (isLoading) {
     return (
-      <div className='w-screen h-screen flex justify-center items-center'>
-      <Image src="/img/loading-spin01.png" alt="loading-icon" width={100} height={100} className="animate-spin duration-1000" />
+      <div className="w-screen h-screen flex justify-center items-center">
+        <Image src="/img/loading-spin01.png" alt="loading-icon" width={100} height={100} className="animate-spin duration-1000" />
       </div>
     );
   }
