@@ -29,8 +29,8 @@ const NoteList = () => {
 
   return (
     <div className="w-10/12 mx-auto rounded-3xl flex flex-row flex-wrap justify-around mt-5">
-      {notes.map((note, index) => (
-        <div key={index} className="mx-5 bg-secondary rounded-lg shadow-lg w-80 h-fit my-5 cursor-pointer hover:scale-105">
+      {notes.map((note) => (
+        <div key={note.id} className="mx-5 bg-secondary rounded-lg shadow-lg w-80 h-fit my-5 cursor-pointer hover:scale-105">
           <Link href={`/${note.id}`}>
             <div className="p-1">
               <h3 className="font-bold text-xl mb-2 text-center">{note.title}</h3>
