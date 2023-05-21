@@ -21,8 +21,10 @@ const NoteList = () => {
 
   if (isLoading) {
     return (
-      <div className="w-screen h-screen flex justify-center items-center">
+      <div className='w-screen h-screen fixed top-0 left-0'>
+      <div className="w-full h-full flex justify-center items-center">
         <Image src="/img/loading-spin01.png" alt="loading-icon" width={100} height={100} className="animate-spin duration-1000" />
+      </div>
       </div>
     );
   }
