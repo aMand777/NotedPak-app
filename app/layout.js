@@ -1,5 +1,7 @@
 import './globals.css';
-import Navbar from '../app/components/navbar';
+import { Provider } from '../Context/notesContext';
+import AuthProvider from '../Context/auth';
+import { UserProvider } from '../Context/user';
 
 export const metadata = {
   title: 'NotedPak',
@@ -10,8 +12,13 @@ export default function RootLayout({ children }) {
     <>
       <html lang="en">
         <body>
-          <Navbar />
-          {children}
+          <>
+            <AuthProvider>
+              <UserProvider>
+                <Provider>{children}</Provider>
+              </UserProvider>
+            </AuthProvider>
+          </>
         </body>
       </html>
     </>

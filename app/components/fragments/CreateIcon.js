@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const AddIcon = () => {
+const CreateIcon = () => {
   return (
     <div className="w-10/12 mx-auto flex flex-row flex-wrap justify-end sticky bottom-3">
       <div className="cursor-pointer hover:scale-125">
@@ -14,4 +14,4 @@ const AddIcon = () => {
   );
 };
 
-export default AddIcon;
+export default CreateIcon;
