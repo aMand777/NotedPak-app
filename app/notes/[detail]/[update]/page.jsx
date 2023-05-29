@@ -2,23 +2,21 @@
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import UpdateNote from '../../../components/templates/UpdateNote';
-import { useContext } from 'react';
-import { Context } from '../../../../Context/notesContext'
+import { useNotes } from '../../../Context/notes-context';
 
-const NoteUpdate = ({params}) => {
+const NoteUpdate = ({ params }) => {
   const searchParams = useSearchParams();
   const id = searchParams.get(`id`);
 
-  const { updatedNotes } = useContext(Context)
-  
+  const { updatedNotes } = useNotes();
   const notes = {
     title: searchParams.get('title') || '',
     body: searchParams.get('body') || '',
     tags: searchParams.get('tags') || '',
   };
-  
+
   const [note, setNote] = useState(notes);
-  console.log('note', note)
+  console.log('note', note);
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -31,26 +29,26 @@ const NoteUpdate = ({params}) => {
   };
 
   const handleSubmit = (event) => {
-console.log('idParams :', params.update)
+    console.log('idParams :', params.update);
     event.preventDefault();
     if (!notes.title) {
       alert('Title is required');
     } else if (!notes.body) {
       alert('Note is required');
     } else {
-      updatedNotes(note, id)
-    };
-  }
-  console.log('note_id', note._id)
-  console.log('id', id)
+      updatedNotes(note, id);
+    }
+  };
+  console.log('note_id', note._id);
+  console.log('id', id);
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-      <UpdateNote title={ note.title } body={note.body} tags={note.tags} handleChange={handleChange} handleSelect={handleSelect} />
+        <UpdateNote title={note.title} body={note.body} tags={note.tags} handleChange={handleChange} handleSelect={handleSelect} />
       </form>
     </>
-  )
-}
+  );
+};
 
 export default NoteUpdate;

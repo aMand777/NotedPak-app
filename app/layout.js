@@ -1,7 +1,6 @@
 import './globals.css';
-import { Provider } from '../Context/notesContext';
-import AuthProvider from '../Context/auth';
-import { UserProvider } from '../Context/user';
+import { NotesProvider } from './Context/notes-context';
+import AuthProvider from './Context/auth-context';
 
 export const metadata = {
   title: 'NotedPak',
@@ -14,9 +13,7 @@ export default function RootLayout({ children }) {
         <body>
           <>
             <AuthProvider>
-              <UserProvider>
-                <Provider>{children}</Provider>
-              </UserProvider>
+              <NotesProvider>{children}</NotesProvider>
             </AuthProvider>
           </>
         </body>

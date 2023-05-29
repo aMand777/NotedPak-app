@@ -84,5 +84,5 @@ const Provider = ({ children }) => {
 };
 
 export { Context, Provider };
-  
-  // getDataNotes, deleteNote, insertedNotes, updatedNotes
+
+// getDataNotes, deleteNote, insertedNotes, updatedNotes

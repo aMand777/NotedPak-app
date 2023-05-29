@@ -1,14 +1,19 @@
 'use client';
-import React from 'react';
+import { useEffect } from 'react';
 import NoteList from '../components/templates/NoteList';
 import CreateIcon from '../components/fragments/CreateIcon';
-import { Context } from '../../Context/notesContext';
-import { useContext } from 'react';
+import { useNotes } from '../Context/notes-context';
 import NotesEmpty from '../components/templates/NotesEmpty';
 import LoadingSpin from '../components/templates/LoadingSpin';
 
 const NotesPage = () => {
-  const { notes, isLoading } = useContext(Context);
+  const { isLoading, getNotes, notes } = useNotes();
+
+
+  useEffect(() => {
+    getNotes();
+  }, []);
+
   const totalData = notes.length;
   console.log('notes', notes);
 

@@ -26,7 +26,7 @@ const RegisterPage = () => {
       .post(`${process.env.NEXT_PUBLIC_API_URL}/register`, user)
       .then((response) => {
         alert(response.statusText);
-        // router.push('/login');
+        router.replace('/login');
       })
       .catch((error) => {
         error.response.data.message === `"confirmPassword" must be [ref:password]` ? alert('Confirm Password Wrong') : alert(error.response.data.message);

@@ -1,11 +1,14 @@
-import React from 'react';
+import NavAuth from '../components/fragments/NavAuth';
 
 export const metadata = {
   title: 'NotedPak | Login',
 };
 
 const LayoutLogin = ({ children }) => {
-  return <div>{children}</div>;
+  return <div>
+  <NavAuth />
+  {children}
+  </div>
 };
 
 export default LayoutLogin;

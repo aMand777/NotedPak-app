@@ -1,13 +1,11 @@
 'use client';
-
 import Detail from '../../components/templates/Detail.js';
-import { Context } from '../../../Context/notesContext';
-import { useContext } from 'react';
+import { useNotes } from '../../Context/notes-context.js';
 import LoadingDetail from '../../components/templates/LoadingDetail.js';
 
 const DetailNote = ({ params }) => {
   const id = params.detail;
-  const { notes, deleteNote } = useContext(Context);
+  const { notes, deleteNote } = useNotes();
   const detailNote = notes.filter((note) => note._id === id);
 
   const deleted = () => {

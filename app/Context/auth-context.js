@@ -3,12 +3,13 @@ import { useContext, createContext, useReducer } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 const InitialAuthState = {
   isLogin: false,
   isLoading: false,
   isError: false,
-  user: {},
+  user: {} || '',
 };
 
 const AuthActions = {
@@ -20,7 +21,6 @@ const AuthActions = {
 };
 
 const AuthReducer = (state, action) => {
-  console.log(action.type);
   switch (action.type) {
     case AuthActions.SET_LOADING:
       return { ...state, isLoading: true };
@@ -49,6 +49,7 @@ export const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
+  const router = useRouter();
   const [state, dispatch] = useReducer(AuthReducer, InitialAuthState);
 
   const Login = async (event, data) => {
@@ -56,39 +57,58 @@ export const AuthProvider = ({ children }) => {
     dispatch({ type: AuthActions.SET_LOADING });
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, data);
-      // sessionStorage.setItem('user', response.data);
-      console.log('response.data', response.data);
+      Cookies.set('token', response.data.token, { expires: 1 });
+      Cookies.set('id', response.data._id, { expires: 1 });
+      Cookies.set('name', response.data.name, { expires: 1 });
       dispatch({
         type: AuthActions.SIGN_IN_SUCCESS,
         payload: { user: response.data },
       });
-      Cookies.set('token', response.data.token, { expires: 1 });
-      Cookies.set('id', response.data._id, { expires: 1 });
-      Cookies.set('name', response.data.name, { expires: 1 });
-      // router.push('/notes');
+      router.replace('/notes');
     } catch (error) {
       console.log(error);
       dispatch({
         type: AuthActions.SIGN_IN_FAILED,
-        payload: { error },
       });
+    }
+  };
+
+  const Logout = () => {
+    try {
+      Cookies.remove('token');
+      Cookies.remove('id');
+      Cookies.remove('name');
+      router.replace('/login');
+      dispatch({
+        type: AuthActions.SIGN_OUT,
+        payload: {},
+      });
+    } catch (error) {
+      console.log(error);
     }
   };
 
   // Mengisi ulang InitialAuthState setelah mengatur cookie
   useEffect(() => {
-    const user = Cookies.get('id');
-    const isLogin = !!user; 
+    const token = Cookies.get('token');
+    const userId = Cookies.get('id');
+    const userName = Cookies.get('name');
+
+    const user = {
+      token: token,
+      id: userId,
+      name: userName,
+    };
+
+    const isLogin = Cookies.get('token') !== undefined;
     dispatch({
       type: AuthActions.SIGN_IN_SUCCESS,
       payload: { user },
     });
-    console.log('isLogin->', isLogin);
+    console.log('userLogin', isLogin);
   }, []);
 
-  console.log('state->', state);
-
-  return <AuthContext.Provider value={{ ...state, dispatch, Login }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ ...state, dispatch, Login, Logout }}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;
