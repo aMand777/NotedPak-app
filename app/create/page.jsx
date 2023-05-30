@@ -32,8 +32,6 @@ const Create = () => {
     }
   };
 
-  console.log('notes', notes);
-
   return (
     <>
       <form action="" onSubmit={handleSubmit}>

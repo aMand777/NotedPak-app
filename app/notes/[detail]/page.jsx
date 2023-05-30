@@ -14,7 +14,6 @@ const DetailNote = ({ params }) => {
 
   return (
     <>
-      <h1>Detail Note with ID {id}</h1>
       {detailNote.length > 0 ? (
         detailNote.map((note) => <Detail key={note._id} id={note._id} title={note.title} body={note.body} tags={note.tags} createdAt={note.createdAt} updatedAt={note.updatedAt} onClick={deleted} />)
       ) : (

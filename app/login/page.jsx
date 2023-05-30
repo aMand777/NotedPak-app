@@ -4,7 +4,6 @@ import LoginForm from '../components/templates/LoginForm';
 import { useState } from 'react';
 
 const LoginPage = () => {
-
   const { Login } = useAuth();
   const [user, setUser] = useState({
     email: '',
@@ -21,14 +20,13 @@ const LoginPage = () => {
     Login(event, user);
   };
 
+
   return (
-    <div className="w-full h-full">
-      <div className="w-1/2 h-5/6 mx-auto bg-green-100 rounded-lg mt-24">
-        <h1 className="text-lg text-center font-semibold italic pt-3">Login</h1>
-        <form onSubmit={handleSubmit}>
-          <LoginForm onChange={handleChange} />
-        </form>
-      </div>
+    <div className="w-9/12 h-fit sm:w-1/3 sm:h-5/6 mx-auto bg-green-100 rounded-lg mt-24 my-auto">
+      <h1 className="text-lg text-center font-semibold italic pt-3">Login</h1>
+      <form onSubmit={handleSubmit}>
+        <LoginForm onChange={handleChange} />
+      </form>
     </div>
   );
 };

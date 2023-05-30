@@ -5,10 +5,12 @@ export const metadata = {
 };
 
 const LayoutLogin = ({ children }) => {
-  return <div>
-  <NavAuth />
-  {children}
-  </div>
+  return (
+    <>
+      <NavAuth />
+      {children}
+    </>
+  );
 };
 
 export default LayoutLogin;

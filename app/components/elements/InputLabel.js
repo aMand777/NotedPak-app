@@ -1,9 +1,8 @@
-import React from 'react';
+'use client'
+const InputLabel = ({ children, htmlFor, className, inputRef, ...rest }) => {
 
-const Input = ({ children, htmlFor, className, ...rest }) => {
   return (
     <>
-      {/* <div className={`${className} my-3 w-1/2 mx-auto`}> */}
       <div className="mb-1">
         <label htmlFor={htmlFor} className="italic">
           <label />
@@ -11,11 +10,9 @@ const Input = ({ children, htmlFor, className, ...rest }) => {
         </label>
       </div>
       <div>
-        <input {...rest} className={`${className}`} />
+        <input ref={inputRef} {...rest} className={`${className}`} />
       </div>
-      {/* </div> */}
     </>
   );
 };
-//className="bg-slate-100 text-sm italic p-1 rounded-sm w-full"
-export default Input;
+export default InputLabel;
