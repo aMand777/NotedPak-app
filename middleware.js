@@ -5,7 +5,6 @@ export const config = {
 };
 
 export function middleware(request) {
-  // const { pathname } = request.nextUrl;
   const isLogin = request.cookies.has('token');
 
   if (!isLogin) {
