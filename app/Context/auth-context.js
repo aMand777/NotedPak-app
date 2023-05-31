@@ -36,7 +36,6 @@ const AuthReducer = (state, action) => {
         ...state,
         isLogin: false,
         isLoading: false,
-        user: action.payload.error,
       };
     case AuthActions.SIGN_OUT:
       return InitialAuthState;
@@ -52,21 +51,20 @@ export const AuthProvider = ({ children }) => {
   const router = useRouter();
   const [state, dispatch] = useReducer(AuthReducer, InitialAuthState);
 
-  const Login = async (event, data) => {
-    event.preventDefault();
+  const Login = async (data) => {
     dispatch({ type: AuthActions.SET_LOADING });
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, data);
       Cookies.set('token', response.data.token, { expires: 1 });
       Cookies.set('id', response.data._id, { expires: 1 });
       Cookies.set('name', response.data.name, { expires: 1 });
+      router.replace('/notes');
       dispatch({
         type: AuthActions.SIGN_IN_SUCCESS,
         payload: { user: response.data },
       });
-      router.replace('/notes');
     } catch (error) {
-      console.log(error);
+      alert(error.response.data.message);
       dispatch({
         type: AuthActions.SIGN_IN_FAILED,
       });
@@ -74,6 +72,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const Logout = () => {
+    dispatch({ type: AuthActions.SET_LOADING });
     try {
       Cookies.remove('token');
       Cookies.remove('id');

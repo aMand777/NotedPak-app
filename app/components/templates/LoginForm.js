@@ -15,7 +15,7 @@ const LoginForm = ({ ...rest }) => {
 
   useEffect(() => {
     focusInput.current.focus();
-  }, [])
+  }, []);
 
   return (
     <div className="w-10/12 mt-5 pb-5 mx-auto">
@@ -29,12 +29,10 @@ const LoginForm = ({ ...rest }) => {
         Show password
       </Checkbox>
       <div className="flex justify-between">
-      <Link href='/signup'>
-        <span className='text-sm font-semibold italic text-blue-500 hover:text-blue-800 cursor-pointer'>Sign up</span>
-      </Link>
-      <Button>
-        Login
-      </Button>
+        <Link href="/signup">
+          <span className="text-sm font-semibold italic text-blue-500 hover:text-blue-800 cursor-pointer">Sign up</span>
+        </Link>
+        <Button>Login</Button>
       </div>
     </div>
   );

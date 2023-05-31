@@ -12,7 +12,6 @@ const Create = () => {
   });
 
   const handleChange = (event) => {
-    event.preventDefault();
     const { name, value } = event.target;
     setNotes({ ...notes, [name]: value });
   };

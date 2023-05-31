@@ -6,8 +6,7 @@ import { useAuth } from '../../Context/auth-context';
 
 const Navbar = ({ children }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const { user } = useAuth();
-  const { Logout } = useAuth();
+  const { user, Logout } = useAuth();
 
   const userLogout = () => {
     Logout();

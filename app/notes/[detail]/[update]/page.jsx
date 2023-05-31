@@ -21,7 +21,6 @@ const NoteUpdate = () => {
     if (note.title.length === 19) {
       alert('Maximum 20 characters');
     }
-    event.preventDefault();
     const { name, value } = event.target;
     setNote({ ...note, [name]: value });
   };

@@ -44,8 +44,10 @@ export const NotesProvider = ({ children }) => {
     async (data) => {
       try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/notes`, data, config);
+        if (response.status === 201) {
+          alert('Note added successfully');
+        }
         router.push('/notes');
-        alert(response.statusText);
       } catch (error) {
         console.log(error);
       }
