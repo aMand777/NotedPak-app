@@ -30,7 +30,7 @@ const Detail = ({ id, title, body, tags, createdAt, updatedAt, onClick }) => {
         <div className="sm:w-11/12 md:w-10/12 mx-auto h-fit">
           <div className="bg-secondary shadow rounded-t-md px-4 max-w-sm w-full mx-auto border border-primary border-b-0">
             <h3 className="font-bold text-xl text-center">{title}</h3>
-            <p className="text-sm mx-1 italic break-words pb-5">{body}</p>
+            <p className="text-sm mx-1 italic break-words pb-10 pt-3">{body}</p>
           </div>
           <div className="bg-secondary rounded-b-md flex flex-row justify-between max-w-sm w-full mx-auto border border-primary border-t-0">
             <p className="text-xs italic pl-2">

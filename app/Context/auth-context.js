@@ -88,7 +88,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Mengisi ulang InitialAuthState setelah mengatur cookie
   useEffect(() => {
     const token = Cookies.get('token');
     const userId = Cookies.get('id');
@@ -105,7 +104,6 @@ export const AuthProvider = ({ children }) => {
       type: AuthActions.SIGN_IN_SUCCESS,
       payload: { user },
     });
-    console.log('userLogin', isLogin);
   }, []);
 
   return <AuthContext.Provider value={{ ...state, dispatch, Login, Logout }}>{children}</AuthContext.Provider>;

@@ -11,7 +11,7 @@ const SampleNotes = ({ body, className }) => {
 
   return (
     <>
-      <div className={`w-9/12 h-fit sm:w-1/3 sm:h-5/6 mx-auto bg-secondary rounded-lg my-auto mt-2 ${className}`}>
+      <div className={`w-9/12 h-fit sm:w-1/4 mx-auto bg-secondary rounded-lg my-auto mt-2 ${className}`}>
         <div className="p-1">
           <h3 className="font-bold text-sm mb-2 text-center italic">Catatan hari ini</h3>
           <p className="text-sm break-words italic p-1 text-center font-thin my-5">{body}</p>

@@ -16,7 +16,6 @@ const Navbar = ({ children }) => {
   const handleClick = () => {
     setIsVisible(!isVisible);
   };
-  console.log('isVisible :', isVisible);
 
   return (
     <>
@@ -34,7 +33,7 @@ const Navbar = ({ children }) => {
           !isVisible ? '-translate-y-44' : 'translate-y-0'
         } flex flex-col fixed bg-primary right-0 pr-20 pl-1 bg-opacity-70 font-semibold cursor-pointer rounded-md outline-double outline-green-200 z-40`}>
         <Link href="/contact" className="my-2">
-          <span className="hover:scale-105 active:opacity-70 z-50 text-xs italic">Hi, {user.name || 'puji'}</span>
+          <span className="hover:scale-105 active:opacity-70 z-50 text-xs italic">Hi, {user.name}</span>
         </Link>
         <Link href="/project" className="my-2">
           <span onClick={userLogout} className="hover:scale-105 active:opacity-70 z-50 text-xs italic font-thin text-blue-500">

@@ -27,7 +27,7 @@ const NoteList = ({ _id, title, body, tags, createdAt, updatedAt }) => {
         <Link href={`/notes/${_id}`}>
           <div className="p-1">
             <h3 className="font-bold text-xl mb-2 text-center">{title}</h3>
-            <p className="text-sm break-words">{body}</p>
+            <p className="text-sm break-words pb-5 px-3">{body}</p>
           </div>
           <div className="bg-secondary rounded-lg flex flex-row justify-between">
             <span className="text-base italic font-medium">

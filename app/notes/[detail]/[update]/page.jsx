@@ -16,9 +16,11 @@ const NoteUpdate = ({ params }) => {
   };
 
   const [note, setNote] = useState(notes);
-  console.log('note', note);
 
   const handleChange = (event) => {
+    if (note.title.length === 19) {
+      alert('Maximum 20 characters');
+    }
     event.preventDefault();
     const { name, value } = event.target;
     setNote({ ...note, [name]: value });
@@ -39,8 +41,6 @@ const NoteUpdate = ({ params }) => {
       updatedNotes(note, id);
     }
   };
-  console.log('note_id', note._id);
-  console.log('id', id);
 
   return (
     <>

@@ -4,15 +4,33 @@ import TextArea from '../elements/TextArea';
 import Category from './Category';
 import Link from 'next/link';
 import Button from '../elements/Button';
+import { useRef, useEffect } from 'react';
 
 const CreateNotes = ({ title, body, tags, handleChange, handleSelect }) => {
+  const focusInput = useRef();
+
+  useEffect(() => {
+    focusInput.current.focus();
+  }, []);
+
   return (
     <>
       <div className="sm:w-11/12 md:w-10/12 mx-auto">
         <div className="bg-secondary rounded-lg w-8/12 sm:w-7/12 md:w-5/12 h-fit my-5 shadow-2xl mx-auto">
           <div className="p-1 ">
             <p className="text-center border border-white rounded-lg">
-              <InputLabel type="text" name="title" placeholder="title .." minLength={3} e maxLength={20} required value={title} onChange={handleChange} className="w-8/12 italic text-center bg-secondary focus:outline-none" />
+              <InputLabel
+                inputRef={focusInput}
+                type="text"
+                name="title"
+                placeholder="title .."
+                minLength={3}
+                maxLength={20}
+                required
+                value={title}
+                onChange={handleChange}
+                className="w-8/12 italic text-center bg-secondary focus:outline-none"
+              />
             </p>
             <p className="text-sm my-3 mx-1 italic">
               <TextArea type="body" rows="5" id="body" name="body" required value={body} onChange={handleChange} placeholder="input your note here .." className="italic bg-secondary focus:outline-none w-full h-fit resize-none" />
