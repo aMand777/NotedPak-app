@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import UpdateNote from '../../../components/templates/UpdateNote';
 import { useNotes } from '../../../Context/notes-context';
 
-const NoteUpdate = ({ params }) => {
+const NoteUpdate = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get(`id`);
 
@@ -31,7 +31,6 @@ const NoteUpdate = ({ params }) => {
   };
 
   const handleSubmit = (event) => {
-    console.log('idParams :', params.update);
     event.preventDefault();
     if (!notes.title) {
       alert('Title is required');

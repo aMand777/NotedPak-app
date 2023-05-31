@@ -14,7 +14,6 @@ const NotesPage = () => {
   }, []);
 
   const totalData = notes.length;
-  console.log('notes', notes)
 
   return (
     <>

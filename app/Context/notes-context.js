@@ -29,7 +29,7 @@ export const NotesProvider = ({ children }) => {
       const confirmation = window.confirm('Are you sure you want to delete this note?');
       if (confirmation) {
         try {
-          await axios.delete(`http://localhost:5000/notes/${id}`, config);
+          await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/notes/${id}`, config);
           router.push('/notes');
           alert('Deleted successfully');
         } catch (error) {
@@ -43,7 +43,7 @@ export const NotesProvider = ({ children }) => {
   const insertedNotes = useCallback(
     async (data) => {
       try {
-        const response = await axios.post('http://localhost:5000/notes', data, config);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/notes`, data, config);
         router.push('/notes');
         alert(response.statusText);
       } catch (error) {
@@ -56,10 +56,11 @@ export const NotesProvider = ({ children }) => {
   const updatedNotes = useCallback(
     async (note, id) => {
       try {
-        const response = await axios.put(`http://localhost:5000/notes/${id}`, note, config);
+        const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/notes/${id}`, note, config);
         router.push('/notes');
-        alert(response.statusText);
-        console.log('ini response detail :', response);
+        if (response.status === 201) {
+          alert('Updated success');
+        }
       } catch (error) {}
     },
     [config, router]

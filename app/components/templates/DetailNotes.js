@@ -26,7 +26,7 @@ const Detail = ({ id, title, body, tags, createdAt, updatedAt, onClick }) => {
 
   return (
     <>
-      <div className="w-8/12 sm:w-7/12 md:w-5/12 h-fit my-5 mx-auto">
+      <div className="w-10/12 sm:w-7/12 md:w-5/12 h-fit my-5 mx-auto">
         <div className="sm:w-11/12 md:w-10/12 mx-auto h-fit">
           <div className="bg-secondary shadow rounded-t-md px-4 max-w-sm w-full mx-auto border border-primary border-b-0">
             <h3 className="font-bold text-xl text-center">{title}</h3>
