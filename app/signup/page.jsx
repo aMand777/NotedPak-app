@@ -1,5 +1,4 @@
 'use client';
-import { useAuth } from '../Context/auth-context';
 import SignupForm from '../components/templates/SignupForm';
 import { useState } from 'react';
 import axios from 'axios';
@@ -7,8 +6,7 @@ import { useRouter } from 'next/navigation';
 import LoadingSpin from '../components/templates/LoadingSpin';
 
 const SignupPage = () => {
-  // const { isLoading, dispatch } = useAuth();
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [user, setUser] = useState({
     name: '',
@@ -23,12 +21,11 @@ const SignupPage = () => {
   };
 
   const handleSubmit = (event) => {
-    setIsLoading(true)
+    setIsLoading(true);
     event.preventDefault();
     axios
       .post(`${process.env.NEXT_PUBLIC_API_URL}/register`, user)
       .then((response) => {
-        setIsLoading(false)
         if (response.status === 201) {
           alert('Signup success, please login');
         }
@@ -36,18 +33,19 @@ const SignupPage = () => {
       })
       .catch((error) => {
         error.response.data.message === `"confirmPassword" must be [ref:password]` ? alert('Confirm Password Wrong') : alert(error.response.data.message);
+        setIsLoading(false);
       });
   };
 
   return (
     <>
-    <LoadingSpin validation={isLoading === true} />
-    <div className="w-9/12 h-fit sm:w-1/3 sm:h-5/6 mx-auto bg-green-100 rounded-lg mt-24 my-auto">
-      <h1 className="text-lg text-center font-semibold italic pt-3">Sign Up</h1>
-      <form>
-        <SignupForm onChange={handleChange} onClick={handleSubmit} />
-      </form>
-    </div>
+      <LoadingSpin validation={isLoading === true} />
+      <div className="w-9/12 h-fit sm:w-1/3 sm:h-5/6 mx-auto bg-green-100 rounded-lg mt-24 my-auto">
+        <h1 className="text-lg text-center font-semibold italic pt-3">Sign Up</h1>
+        <form>
+          <SignupForm onChange={handleChange} onClick={handleSubmit} />
+        </form>
+      </div>
     </>
   );
 };
