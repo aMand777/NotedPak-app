@@ -18,8 +18,8 @@ const NoteUpdate = () => {
   const [note, setNote] = useState(notes);
 
   const handleChange = (event) => {
-    if (note.title.length === 19) {
-      alert('Maximum 20 characters');
+    if (note.title.length === 20) {
+      alert('Title maximum 20 characters');
     }
     const { name, value } = event.target;
     setNote({ ...note, [name]: value });

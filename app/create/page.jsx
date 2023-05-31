@@ -5,35 +5,38 @@ import { useNotes } from '../Context/notes-context';
 
 const Create = () => {
   const { insertedNotes } = useNotes();
-  const [notes, setNotes] = useState({
+  const [note, setNote] = useState({
     title: '',
     body: '',
     tags: 'low',
   });
 
   const handleChange = (event) => {
+    if (note.title.length === 20) {
+      alert('Title maximum 20 characters');
+    }
     const { name, value } = event.target;
-    setNotes({ ...notes, [name]: value });
+    setNote({ ...note, [name]: value });
   };
 
   const handleSelect = (event) => {
-    setNotes({ ...notes, tags: event.target.value });
+    setNote({ ...note, tags: event.target.value });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!notes.title) {
+    if (!note.title) {
       alert('Title is required');
-    } else if (!notes.body) {
+    } else if (!note.body) {
       alert('Note is required');
     } else {
-      insertedNotes(notes);
+      insertedNotes(note);
     }
   };
 
   return (
     <>
-      <form action="" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <CreateNote handleChange={handleChange} handleSelect={handleSelect} />
       </form>
     </>
