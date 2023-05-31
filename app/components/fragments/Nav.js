@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 import { useState } from 'react';
 import Image from 'next/image';
 import { useAuth } from '../../Context/auth-context';
@@ -31,14 +30,10 @@ const Navbar = ({ children }) => {
         className={`md:hidden transition-transform duration-1000 transform mt-1 ${
           !isVisible ? '-translate-y-44' : 'translate-y-0'
         } flex flex-col fixed bg-primary right-0 pr-20 pl-1 bg-opacity-70 font-semibold cursor-pointer rounded-md outline-double outline-green-200 z-40`}>
-        <Link href="/contact" className="my-2">
-          <span className="hover:scale-105 active:opacity-70 z-50 text-xs italic">Hi, {user.name}</span>
-        </Link>
-        <Link href="/project" className="my-2">
-          <span onClick={userLogout} className="hover:scale-105 active:opacity-70 z-50 text-xs italic font-thin text-blue-500">
-            Logout
-          </span>
-        </Link>
+        <span className="hover:scale-105 active:opacity-70 z-50 text-xs italic mt-1 mb-2">Hi, {user.name}</span>
+        <span onClick={userLogout} className="hover:scale-105 active:opacity-70 z-50 text-xs italic font-thin mb-1 text-blue-500">
+          Logout
+        </span>
       </div>
     </>
   );

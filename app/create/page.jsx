@@ -12,11 +12,13 @@ const Create = () => {
   });
 
   const handleChange = (event) => {
-    if (note.title.length === 20) {
-      alert('Title maximum 20 characters');
-    }
     const { name, value } = event.target;
     setNote({ ...note, [name]: value });
+
+    if (note.title.length === 19) {
+      alert('Title maximum 20 characters');
+    }
+    console.log(note.title.length);
   };
 
   const handleSelect = (event) => {
