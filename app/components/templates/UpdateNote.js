@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Button from '../elements/Button';
 import { useRef, useEffect } from 'react';
 
-const CreateNotes = ({ title, body, tags, handleChange, handleSelect }) => {
+const CreateNotes = ({ id, title, body, tags, handleChange, handleSelect }) => {
   const focusInput = useRef();
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const CreateNotes = ({ title, body, tags, handleChange, handleSelect }) => {
           </div>
         </div>
         <div className="w-8/12 sm:w-7/12 md:w-5/12 mx-auto flex flex-row justify-between">
-          <Link href="/notes">
+          <Link href={`/notes/${id}`}>
             <Button>Back</Button>
           </Link>
           <Button>Save</Button>

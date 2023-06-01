@@ -44,7 +44,7 @@ const NoteUpdate = () => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <UpdateNote title={note.title} body={note.body} tags={note.tags} handleChange={handleChange} handleSelect={handleSelect} />
+        <UpdateNote id={id} title={note.title} body={note.body} tags={note.tags} handleChange={handleChange} handleSelect={handleSelect} />
       </form>
     </>
   );

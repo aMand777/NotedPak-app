@@ -26,11 +26,11 @@ export const NotesProvider = ({ children }) => {
 
   const deleteNote = useCallback(
     async (id) => {
-      const confirmation = window.confirm('Are you sure you want to delete this note?');
+      const confirmation = window.confirm('Are you sure want to delete this note?');
       if (confirmation) {
         try {
           await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/notes/${id}`, config);
-          router.push('/notes');
+          router.replace('/notes');
           alert('Deleted successfully');
         } catch (error) {
           console.log(error);
@@ -47,7 +47,7 @@ export const NotesProvider = ({ children }) => {
         if (response.status === 201) {
           alert('Note added successfully');
         }
-        router.push('/notes');
+        router.replace('/notes');
       } catch (error) {
         console.log(error);
       }
@@ -59,7 +59,7 @@ export const NotesProvider = ({ children }) => {
     async (note, id) => {
       try {
         const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/notes/${id}`, note, config);
-        router.push('/notes');
+        router.replace('/notes');
         if (response.status === 201) {
           alert('Updated success');
         }

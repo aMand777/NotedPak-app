@@ -41,7 +41,7 @@ const Detail = ({ id, title, body, tags, createdAt, updatedAt, onClick }) => {
         </div>
         <div className="max-w-sm w-full mx-auto flex flex-row justify-between mt-3">
           <Button onClick={onClick}>Delete</Button>
-          <Button onClick={() => router.push(`/notes/update/&?id=${id}&title=${title}&body=${body}&tags=${tags}`)}>Update</Button>
+          <Button onClick={() => router.replace(`/notes/update/&?id=${id}&title=${title}&body=${body}&tags=${tags}`)}>Update</Button>
         </div>
       </div>
     </>

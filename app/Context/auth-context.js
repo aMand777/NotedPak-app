@@ -2,13 +2,13 @@
 import { useContext, createContext, useReducer } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const InitialAuthState = {
   isLogin: false,
   isLoading: false,
-  isError: false,
+  isError: '',
   user: {} || '',
 };
 
@@ -28,7 +28,6 @@ const AuthReducer = (state, action) => {
       return {
         isLogin: true,
         isLoading: false,
-        isError: false,
         user: action.payload.user,
       };
     case AuthActions.SIGN_IN_FAILED:
@@ -36,6 +35,7 @@ const AuthReducer = (state, action) => {
         ...state,
         isLogin: false,
         isLoading: false,
+        isError: action.payload,
       };
     case AuthActions.SIGN_OUT:
       return InitialAuthState;
@@ -52,6 +52,7 @@ export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, InitialAuthState);
 
   const Login = async (data) => {
+    // const [errorLogin, setErrorLogin] = useState('')
     dispatch({ type: AuthActions.SET_LOADING });
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, data);
@@ -64,9 +65,11 @@ export const AuthProvider = ({ children }) => {
         payload: { user: response.data },
       });
     } catch (error) {
-      alert(error.response.data.message);
+      // alert(error.response.data.message);
+      // setErrorLogin(error.response.data.message);
       dispatch({
         type: AuthActions.SIGN_IN_FAILED,
+        payload: error.response.data.message,
       });
     }
   };

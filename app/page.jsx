@@ -24,7 +24,7 @@ const Home = () => {
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       alert('Please login first');
-      router.push('/login');
+      router.replace('/login');
     }
   };
 

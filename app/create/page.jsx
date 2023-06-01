@@ -18,7 +18,6 @@ const Create = () => {
     if (note.title.length === 19) {
       alert('Title maximum 20 characters');
     }
-    console.log(note.title.length);
   };
 
   const handleSelect = (event) => {

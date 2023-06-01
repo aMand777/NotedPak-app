@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import LoadingSpin from '../components/templates/LoadingSpin';
 
 const SignupPage = () => {
+  const [isErrorValidation, setIsErrorValidation] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [user, setUser] = useState({
@@ -32,7 +33,7 @@ const SignupPage = () => {
         router.replace('/login');
       })
       .catch((error) => {
-        error.response.data.message === `"confirmPassword" must be [ref:password]` ? alert('Confirm Password Wrong') : alert(error.response.data.message);
+        setIsErrorValidation(error.response.data.message)
         setIsLoading(false);
       });
   };
@@ -42,8 +43,8 @@ const SignupPage = () => {
       <LoadingSpin validation={isLoading === true} />
       <div className="w-9/12 h-fit sm:w-1/3 sm:h-5/6 mx-auto bg-green-100 rounded-lg mt-24 my-auto">
         <h1 className="text-lg text-center font-semibold italic pt-3">Sign Up</h1>
-        <form>
-          <SignupForm onChange={handleChange} onClick={handleSubmit} />
+        <form onSubmit={handleSubmit}>
+          <SignupForm onChange={handleChange} isError={isErrorValidation} />
         </form>
       </div>
     </>
