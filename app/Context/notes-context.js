@@ -75,8 +75,8 @@ export const NotesProvider = ({ children }) => {
       setIsLoading(false);
     } catch (error) {
       if (error.response.data.status === 401 && alert('Your session has expired, please login')) {
-        router.replace('/login');
       }
+      router.replace('/login');
     }
   }, [user.token]);
 
