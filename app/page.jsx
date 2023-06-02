@@ -7,9 +7,15 @@ import InputLabel from './components/elements/InputLabel';
 import SampleNotes from './components/templates/SampleNotes';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
+
 
 const Home = () => {
   const router = useRouter();
+  const isLogin = Cookies.get('token');
+  if (isLogin) {
+    router.replace('/notes');
+  }
   const [sampleNotes, setSampleNotes] = useState('');
   const focusInput = useRef();
 
@@ -37,7 +43,9 @@ const Home = () => {
           <div className="w-32 h-32 mx-auto relative my-5">
             <Image src="/img/favicon.ico" alt="notedPak-icon" fill={true} />
           </div>
-          <InputLabel inputRef={focusInput} placeholder="catatan hari ini.." onChange={handleChange} onKeyDown={handleKeyDown} className="text-xs p-1 italic mb-2 focus:outline-primary" />
+          <div className="w-9/12 sm:w-1/3 mx-auto">
+            <InputLabel inputRef={focusInput} placeholder="catatan hari ini.." onChange={handleChange} onKeyDown={handleKeyDown} className="text-xs italic mb-2" />
+          </div>
           <div className="flex flex-roe justify-evenly">
             <Link href="/login">
               <Button>Log in</Button>

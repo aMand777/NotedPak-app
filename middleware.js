@@ -7,7 +7,7 @@ export const config = {
 export function middleware(request) {
   const isLogin = request.cookies.has('token');
 
-  if (!isLogin) {
+if (!isLogin) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
   return NextResponse.next();
