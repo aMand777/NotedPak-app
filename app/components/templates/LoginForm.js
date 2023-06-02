@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import Checkbox from '../elements/Checkbox';
 import Button from '../elements/Button';
 import Link from 'next/link';
-import ValidationError from '../fragments/ValidationError';
+import ValidationError from '../fragments/ValidationErrorAuth';
 
 const LoginForm = ({ ...rest }) => {
   const { isError } = useAuth();
@@ -24,11 +24,11 @@ const LoginForm = ({ ...rest }) => {
       <InputLabel {...rest} inputRef={focusInput} htmlFor="email" id="email" type="email" name="email" placeholder="input your email" className="bg-slate-100 text-sm italic p-1 rounded-sm w-full focus:outline-primary">
         Email
       </InputLabel>
-      <ValidationError className={isError && isError.includes('email') ? 'visible' : 'invisible'} errorMessage={isError} />
+      <ValidationError className={isError && isError.includes('email') ? 'block' : 'hidden'} errorMessage={isError} />
       <InputLabel {...rest} htmlFor="password" id="password" type={!isChecked ? 'password' : 'text'} name="password" placeholder="input your password" className="bg-slate-100 text-sm italic p-1 rounded-sm w-full focus:outline-primary">
         Password
       </InputLabel>
-      <ValidationError className={isError && isError.includes('password') ? 'visible' : 'invisible'} errorMessage={isError} />
+      <ValidationError className={isError && isError.includes('password') ? 'block' : 'hidden'} errorMessage={isError} />
       <Checkbox className="my-3" checked={isChecked} onChange={handleCheckboxChange}>
         Show password
       </Checkbox>
