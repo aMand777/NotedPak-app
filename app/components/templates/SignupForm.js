@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 import Checkbox from '../elements/Checkbox';
 import Button from '../elements/Button';
 import Link from 'next/link';
-import ValidationError from '../fragments/ValidationErrorAuth';
 
 const SignupForm = ({ isError, ...rest }) => {
   const focusInput = useRef();
@@ -19,29 +18,51 @@ const SignupForm = ({ isError, ...rest }) => {
 
   return (
     <div className="w-10/12 mt-5 pb-5 mx-auto">
-      <InputLabel {...rest} inputRef={focusInput} htmlFor="name" id="name" type="text" name="name" placeholder="input your name" className="bg-slate-100 text-sm italic p-1 rounded-sm w-full focus:outline-primary">
-        Name
-      </InputLabel>
-      <ValidationError className={isError && isError.includes('name') ? 'block' : 'hidden'} errorMessage={isError} />
-      <InputLabel {...rest} htmlFor="email" id="email" type="email" name="email" placeholder="input your email" className="bg-slate-100 text-sm italic p-1 rounded-sm w-full focus:outline-primary">
-        Email
-      </InputLabel>
-      <ValidationError className={isError && isError.includes('email') ? 'block' : 'hidden'} errorMessage={isError} />
-      <InputLabel {...rest} htmlFor="password" id="password" type={!isChecked ? 'password' : 'text'} name="password" placeholder="input your password" className="bg-slate-100 text-sm italic p-1 rounded-sm w-full focus:outline-primary">
-        Password
-      </InputLabel>
-      <ValidationError className={isError && isError.includes('password') ? 'block' : 'hidden'} errorMessage={isError} />
       <InputLabel
         {...rest}
+        errorMessage={isError && isError.includes('name') ? isError : ''}
+        inputRef={focusInput}
+        htmlFor="name"
+        id="name"
+        type="text"
+        name="name"
+        placeholder="input your name"
+        className={`bg-slate-100 ${isError && isError.includes('name') ? 'border' : 'border-0'}`}>
+        Name
+      </InputLabel>
+      <InputLabel
+        {...rest}
+        errorMessage={isError && isError.includes('email') ? isError : ''}
+        htmlFor="email"
+        id="email"
+        type="email"
+        name="email"
+        placeholder="input your email"
+        className={`bg-slate-100 ${isError && isError.includes('email') ? 'border' : 'border-0'}`}>
+        Email
+      </InputLabel>
+      <InputLabel
+        {...rest}
+        errorMessage={isError && isError.includes('password') ? isError : ''}
+        htmlFor="password"
+        id="password"
+        type={!isChecked ? 'password' : 'text'}
+        name="password"
+        placeholder="input your password"
+        className={`bg-slate-100 ${isError && isError.includes('password') ? 'border' : 'border-0'}`}>
+        Password
+      </InputLabel>
+      <InputLabel
+        {...rest}
+        errorMessage={isError && isError.includes('confirmPassword') ? isError : ''}
         htmlFor="repeatPassword"
         id="repeatPassword"
         type={!isChecked ? 'password' : 'text'}
         name="confirmPassword"
         placeholder="repeat password"
-        className="bg-slate-100 text-sm italic p-1 rounded-sm w-full focus:outline-primary">
+        className={`bg-slate-100 ${isError && isError.includes('confirmPassword') ? 'border' : 'border-0'}`}>
         Confirm Password
       </InputLabel>
-      <ValidationError className={isError && isError.includes('confirmPassword') ? 'block' : 'hidden'} errorMessage={isError} />
       <Checkbox className="my-3" checked={isChecked} onChange={handleCheckboxChange}>
         Show password
       </Checkbox>

@@ -1,4 +1,4 @@
-const ValidationError = ({errorMessage, className}) => {
+const ConfirmNoteStatus = ({errorMessage, className}) => {
   return (
     <>
       <div className={`w-full mx-auto bg-red-100 outline-red-300 outline-1 outline-double outline-offset-2 my-1 rounded-sm ${className}`}>
@@ -8,4 +8,4 @@ const ValidationError = ({errorMessage, className}) => {
   );
 };
 
-export default ValidationError;
+export default ConfirmNoteStatus;
