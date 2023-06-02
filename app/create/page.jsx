@@ -2,8 +2,17 @@
 import { useState } from 'react';
 import CreateNote from '../components/templates/CreateNotes';
 import { useNotes } from '../Context/notes-context';
+import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
+import { validateTokenExp } from '../configs/validateUserLogin';
 
 const Create = () => {
+  const router = useRouter();
+  const token = Cookies.get('token');
+  if (!validateTokenExp(token)) {
+    router.replace('/login');
+  }
+
   const { insertedNotes } = useNotes();
   const [note, setNote] = useState({
     title: '',

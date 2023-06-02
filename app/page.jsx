@@ -8,14 +8,20 @@ import SampleNotes from './components/templates/SampleNotes';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
-
+import validateTokenExp from './configs/validateUserLogin';
 
 const Home = () => {
   const router = useRouter();
   const isLogin = Cookies.get('token');
+
   if (isLogin) {
     router.replace('/notes');
   }
+
+  if (!validateTokenExp(isLogin)) {
+    router.replace('login');
+  }
+
   const [sampleNotes, setSampleNotes] = useState('');
   const focusInput = useRef();
 

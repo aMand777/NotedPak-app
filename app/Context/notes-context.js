@@ -49,7 +49,9 @@ export const NotesProvider = ({ children }) => {
         }
         router.replace('/notes');
       } catch (error) {
-        console.log(error);
+        if (error.response.data.status === 401 && alert('Your session has expired, please login')) {
+        }
+        router.replace('/login');
       }
     },
     [config, router]

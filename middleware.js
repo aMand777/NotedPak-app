@@ -5,9 +5,11 @@ export const config = {
 };
 
 export function middleware(request) {
-  const isLogin = request.cookies.has('token');
+  // const { pathname } = request.nextUrl;
 
-if (!isLogin) {
+  const isLogin = request.cookies.get('token');
+
+  if (!isLogin) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
   return NextResponse.next();
