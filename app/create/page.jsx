@@ -9,7 +9,7 @@ import { validateTokenExp } from '../configs/validateUserLogin';
 const Create = () => {
   const router = useRouter();
   const token = Cookies.get('token');
-  if (!validateTokenExp(token)) {
+  if (validateTokenExp(token) === false) {
     router.replace('/login');
   }
 
