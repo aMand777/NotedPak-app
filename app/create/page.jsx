@@ -5,15 +5,17 @@ import { useNotes } from '../Context/notes-context';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 import { validateTokenExp } from '../configs/validateUserLogin';
+import Alert from '../components/fragments/Alert'
 
 const Create = () => {
+  // const [alertConfirm, setAlertConfirm] = useState('')
   const router = useRouter();
   const token = Cookies.get('token');
   if (validateTokenExp(token) === false) {
     router.replace('/login');
   }
 
-  const { insertedNotes } = useNotes();
+  const { insertedNotes, alert, setAlert, message } = useNotes();
   const [note, setNote] = useState({
     title: '',
     body: '',
@@ -23,10 +25,6 @@ const Create = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setNote({ ...note, [name]: value });
-
-    if (note.title.length === 19) {
-      alert('Title maximum 20 characters');
-    }
   };
 
   const handleSelect = (event) => {
@@ -34,6 +32,7 @@ const Create = () => {
   };
 
   const handleSubmit = (event) => {
+    setAlert(true)
     event.preventDefault();
     if (!note.title) {
       alert('Title is required');
@@ -44,8 +43,13 @@ const Create = () => {
     }
   };
 
+  const routes = () => {
+    router.replace('/notes');
+  }
+
   return (
     <>
+      <Alert validation={alert} routes={routes} message={message} />
       <form onSubmit={handleSubmit}>
         <CreateNote handleChange={handleChange} handleSelect={handleSelect} />
       </form>

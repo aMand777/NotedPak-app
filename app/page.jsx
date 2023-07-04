@@ -8,7 +8,7 @@ import SampleNotes from './components/templates/SampleNotes';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
-import validateTokenExp from './configs/validateUserLogin';
+import ConfirmNoteStatus from './components/fragments/Alert';
 
 const Home = () => {
   const router = useRouter();
@@ -16,10 +16,6 @@ const Home = () => {
 
   if (isLogin) {
     router.replace('/notes');
-  }
-
-  if (!validateTokenExp(isLogin)) {
-    router.replace('login');
   }
 
   const [sampleNotes, setSampleNotes] = useState('');
@@ -43,6 +39,7 @@ const Home = () => {
   return (
     <>
       <NavAuth />
+      {/* <ConfirmNoteStatus /> */}
       <div className="w-9/12 sm:w-1/3 mx-auto bg-green-100 rounded-lg sm:mt-5 mt-3 py-5">
         <div className="text-lg text-center font-semibold italic pt-3">
           <h1>Welcome to NotedPak</h1>

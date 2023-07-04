@@ -12,6 +12,9 @@ export const NotesProvider = ({ children }) => {
   const { user } = useAuth();
 
   const [notes, setNotes] = useState([]);
+  const [message, setMessage] = useState('');
+  const [alert, setAlert] = useState(false);
+  const [confirmation, setConfirmation] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const token = Cookies.get('token');
@@ -26,18 +29,15 @@ export const NotesProvider = ({ children }) => {
 
   const deleteNote = useCallback(
     async (id) => {
-      const confirmation = window.confirm('Are you sure want to delete this note?');
-      if (confirmation) {
         try {
-          await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/notes/${id}`, config);
-          router.replace('/notes');
-          alert('Deleted successfully');
+          const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/notes/${id}`, config);
+            setMessage(response.status)
+            setAlert(true);
         } catch (error) {
           console.log(error);
-        }
       }
     },
-    [config, router]
+    [config]
   );
 
   const insertedNotes = useCallback(
@@ -45,11 +45,12 @@ export const NotesProvider = ({ children }) => {
       try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/notes`, data, config);
         if (response.status === 201) {
-          alert('Note added successfully');
+          setMessage(response.status)
         }
-        router.replace('/notes');
       } catch (error) {
-        if (error.response.data.status === 401 && alert('Your session has expired, please login')) {
+        if (error.response.data.status === 401) {
+          setMessage(error.response.data.status)
+          setAlert(true)
         }
         router.replace('/login');
       }
@@ -61,13 +62,12 @@ export const NotesProvider = ({ children }) => {
     async (note, id) => {
       try {
         const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/notes/${id}`, note, config);
-        router.replace('/notes');
         if (response.status === 201) {
-          alert('Updated success');
+          setMessage(response.status)
         }
       } catch (error) {}
     },
-    [config, router]
+    [config]
   );
 
   const getNotes = useCallback(async () => {
@@ -76,11 +76,15 @@ export const NotesProvider = ({ children }) => {
       setNotes(response.data);
       setIsLoading(false);
     } catch (error) {
-      if (error.response.data.status === 401 && alert('Your session has expired, please login')) {
+      if (error.response.data.status === 401) {
+        setMessage(error.response.data.status)
+        setAlert(true)
       }
       router.replace('/login');
     }
-  }, [user.token]);
+  }, [config, router]);
 
-  return <NotesContext.Provider value={{ deleteNote, insertedNotes, updatedNotes, getNotes, notes, isLoading }}>{children}</NotesContext.Provider>;
+  return <NotesContext.Provider value={{
+    deleteNote, insertedNotes, updatedNotes, getNotes, notes, isLoading, alert, setAlert, confirmation, setConfirmation, message
+  }}>{children}</NotesContext.Provider>;
 };
